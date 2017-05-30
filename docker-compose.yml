@@ -1,0 +1,26 @@
+version: '2'
+services:
+  # mysql data
+  mysqldata:
+    image: busybox
+    volumes:
+     - /var/lib/mysql
+  # mysql
+  mysql:
+    image: mysql:5.6.31
+    volumes_from:
+     - mysqldata
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./docker/db_init:/docker-entrypoint-initdb.d
+  # apache
+  server:
+    build: ./docker/server
+    volumes:
+      - .:/var/www/app
+      - /tmp:/var/log/httpd
+    ports:
+      - "8000:8000"
