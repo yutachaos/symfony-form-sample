@@ -2,13 +2,12 @@ selenium-test-for-symfony
 =========================
 
 # 内容
-symfony2でphpunit + seleniumを利用するテストプログラム
+symfony2でのFormTypeを利用した登録、validation処理の基本サンプル
 
 ## Description
-symfony2でphpunit + seleniumを利用するテストプログラム
 動作環境は
 php5.6,mysql 5.6.31
-動作確認画面はdoctrineのCRUD自動生成コマンドで作成。
+動作確認画面はdoctrineのCRUD自動生成コマンドで作成したものを基本に編集
 `php app/console doctrine:generate:crud`
 ### dockerコンテナ
 
@@ -28,15 +27,7 @@ php5.6,mysql 5.6.31
 	* root / passwordでログインできます
 	* \# mysql -h 127.0.0.1 -uroot -ppassword
 
-#### SeleniumHQ/docker-selenium
 
-* SeleniumHQ/selenium/standalone-chrome-debugを利用しています
-    * docker内にselenium サーバーとchromeがインストール済みパッケージ。
-    * コンテナの4444,5900とホストの4444,5900をバインドしています。
-    * 立ち上げると4444ポートでselenium serverが立ち上がり、5900ポートでVNCが立ち上がります。Finder→移動→サーバへ接続→サーバアドレス[vnc://localhost:5900]でVNCに接続できます(passwordはsecret)
-
-#### サンプルテスト実行
-- レポジトリのルートディレクトリ`php bin/phpunit -c app` で実行出来ます。
 
 ## Requirement
 php,docker,composer
@@ -54,7 +45,7 @@ symfonyの依存ファイルをinstallする
 php composer.phar -n --dev install
 ```
 ## Qiita
-- http://qiita.com/yutaChaos/items/4a1da5d55a3bf0df889e
+- http://qiita.com/yutaChaos/items/0ae0d1797db4cb16466c
 
 ## Licence
 
