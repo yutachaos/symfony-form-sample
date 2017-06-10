@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Task</th>
                 <th>Memo</th>
+                <th>Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
                 <td><a href="{{ path('todo_show', { 'id': toDo.id }) }}">{{ toDo.id }}</a></td>
                 <td>{{ toDo.task }}</td>
                 <td>{{ toDo.memo }}</td>
+                <td>{{ toDo.date }}</td>
                 <td>
                     <ul class="unstyled">
                         <li>

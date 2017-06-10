@@ -2,6 +2,7 @@ CREATE TABLE `symfony`.`to_do` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `task` tinyint(1) COLLATE utf8_unicode_ci NOT NULL,
   `memo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date` DATE NOT NULL,
   `r_datetime` datetime DEFAULT NULL,
   `u_datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)

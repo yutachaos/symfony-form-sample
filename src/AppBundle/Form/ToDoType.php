@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type as InputType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraint as Custom;
 
 class ToDoType extends AbstractType
 {
@@ -21,40 +22,46 @@ class ToDoType extends AbstractType
                 [
                     'choices' => [
                         '1' => 'work',
-                        '2' => 'hobby'
+                        '2' => 'hobby',
                     ],
 
-                    'constraints' =>
-                        [
-                            new Constraints\NotBlank()
-                        ]
+                    'constraints' => [
+                            new Assert\NotBlank(),
+                        ],
                 ]
             )
             ->add('memo',
                 InputType\TextareaType::class,
                 [
                     'constraints' => [
-                        new Constraints\NotBlank(),
-                        new Constraints\Length(['max' => 255])
-                    ]
+                        new Assert\NotBlank(),
+                        new Assert\Length(['min' => 2, 'max' => 255]),
+                    ],
+                ])
+            ->add('date',
+                InputType\TextType::class,
+                [
+                    'constraints' => [
+                        new Custom\CheckDateFormat(),
+                    ],
                 ]);
 
         $entity = $builder->getData();
 
-        if(!$entity->getId()){
+        if (!$entity->getId()) {
             $builder->add('Create', InputType\SubmitType::class,
                 [
                     'attr' => [
-                        'class' => 'btn btn-primary'
-                    ]
+                        'class' => 'btn btn-primary',
+                    ],
                 ]
             );
-        }else{
+        } else {
             $builder->add('Edit', InputType\SubmitType::class,
             [
             'attr' => [
-                'class' => 'btn btn-primary'
-            ]
+                'class' => 'btn btn-primary',
+            ],
                 ]
             );
         }
@@ -66,7 +73,7 @@ class ToDoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\ToDo'
+            'data_class' => 'AppBundle\Entity\ToDo',
         ));
     }
 
@@ -77,6 +84,4 @@ class ToDoType extends AbstractType
     {
         return 'appbundle_todo';
     }
-
-
 }

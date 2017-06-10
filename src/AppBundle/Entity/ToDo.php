@@ -3,16 +3,17 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraint as Custom;
 
 /**
- * ToDo
+ * ToDo.
  *
  * @ORM\Table(name="to_do")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ToDoRepository")
  */
 class ToDo
 {
-
     /**
      * @var int
      *
@@ -24,17 +25,24 @@ class ToDo
 
     /**
      * @var string
-     *
      * @ORM\Column(name="task", type="integer", length=1)
      */
     private $task;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 2,max = 255)
      * @ORM\Column(name="memo", type="string", length=255, nullable=true)
      */
     private $memo;
+
+    /**
+     * @var string
+     * @Custom\CheckDateFormat()
+     * @ORM\Column(name="date", type="datetime",nullable=false)
+     */
+    private $date;
 
     /**
      * @var \DateTime
@@ -51,9 +59,9 @@ class ToDo
     private $uDatetime;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -61,9 +69,10 @@ class ToDo
     }
 
     /**
-     * Set task
+     * Set task.
      *
      * @param string $task
+     *
      * @return ToDo
      */
     public function setTask($task)
@@ -74,9 +83,9 @@ class ToDo
     }
 
     /**
-     * Get task
+     * Get task.
      *
-     * @return string 
+     * @return string
      */
     public function getTask()
     {
@@ -84,9 +93,10 @@ class ToDo
     }
 
     /**
-     * Set memo
+     * Set memo.
      *
      * @param string $memo
+     *
      * @return ToDo
      */
     public function setMemo($memo)
@@ -97,9 +107,9 @@ class ToDo
     }
 
     /**
-     * Get memo
+     * Get memo.
      *
-     * @return string 
+     * @return date
      */
     public function getMemo()
     {
@@ -107,9 +117,28 @@ class ToDo
     }
 
     /**
-     * Set rDatetime
+     * @return date
+     */
+    public function getDate()
+    {
+        return $this->date;
+
+        return $this;
+    }
+
+    /**
+     * @param string $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * Set rDatetime.
      *
      * @param \DateTime $rDatetime
+     *
      * @return ToDo
      */
     public function setRDatetime($rDatetime)
@@ -120,7 +149,7 @@ class ToDo
     }
 
     /**
-     * Get rDatetime
+     * Get rDatetime.
      *
      * @return \DateTime
      */
@@ -130,9 +159,10 @@ class ToDo
     }
 
     /**
-     * Set uDatetime
+     * Set uDatetime.
      *
      * @param \DateTime $uDatetime
+     *
      * @return ToDo
      */
     public function setUDatetime($uDatetime)
@@ -143,7 +173,7 @@ class ToDo
     }
 
     /**
-     * Get uDatetime
+     * Get uDatetime.
      *
      * @return \DateTime
      */
@@ -168,5 +198,4 @@ class ToDo
     {
         $this->setUDatetime(new \Datetime());
     }
-
 }
