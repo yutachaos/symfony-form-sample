@@ -1,4 +1,4 @@
-selenium-test-for-symfony
+for-symfony-form-sample
 =========================
 
 # 内容
