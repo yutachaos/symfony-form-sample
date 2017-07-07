@@ -8,6 +8,7 @@
             <tr>
                 <th>Id</th>
                 <th>Task</th>
+                <th>Type</th>
                 <th>Memo</th>
                 <th>Date</th>
                 <th>Actions</th>
@@ -17,9 +18,10 @@
         {% for toDo in toDos %}
             <tr>
                 <td><a href="{{ path('todo_show', { 'id': toDo.id }) }}">{{ toDo.id }}</a></td>
-                <td>{{ toDo.task }}</td>
+                <td>{{ toDo.taskName }}</td>
+                <td>{{ toDo.typeNames }}</td>
                 <td>{{ toDo.memo }}</td>
-                <td>{{ toDo.date }}</td>
+                <td>{{ toDo.date|date('Y-m-d') }}</td>
                 <td>
                     <ul class="unstyled">
                         <li>

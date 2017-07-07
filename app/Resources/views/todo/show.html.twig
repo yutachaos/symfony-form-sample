@@ -11,7 +11,11 @@
             </tr>
             <tr>
                 <th>Task</th>
-                <td id="task_text" >{{ toDo.task }}</td>
+                <td id="task_text" >{{ toDo.taskName }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td id="memo_type">{{ toDo.typeNames }}</td>
             </tr>
             <tr>
                 <th>Memo</th>
@@ -19,7 +23,7 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td id="memo_text">{{ toDo.date }}</td>
+                <td id="memo_text">{{ toDo.date|date('Y-m-d')  }}</td>
             </tr>
         </tbody>
     </table>

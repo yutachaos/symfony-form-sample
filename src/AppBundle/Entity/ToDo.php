@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraint as Custom;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * ToDo.
@@ -14,6 +16,19 @@ use AppBundle\Validator\Constraint as Custom;
  */
 class ToDo
 {
+
+    const TASK_LIST = [
+        '1' => 'work',
+        '2' => 'hobby',
+    ];
+
+    const TYPE_DELIMITER = ',';
+    const TYPE_LIST = [
+        '1' => 'Hobby',
+        '2' => 'Work',
+        '3' => 'Study',
+    ];
+
     /**
      * @var int
      *
@@ -39,7 +54,12 @@ class ToDo
 
     /**
      * @var string
-     * @Custom\CheckDateFormat()
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @var string
      * @ORM\Column(name="date", type="datetime",nullable=false)
      */
     private $date;
@@ -90,6 +110,26 @@ class ToDo
     public function getTask()
     {
         return $this->task;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return ToDo
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -198,4 +238,29 @@ class ToDo
     {
         $this->setUDatetime(new \Datetime());
     }
+
+    /**
+     * taskの表示値を取得
+     */
+    public function getTaskName()
+    {
+        $task = $this->getTask();
+        return self::TASK_LIST[$task];
+    }
+
+    /**
+     * typeの表示値を取得
+     */
+    public function getTypeNames()
+    {
+        $types = explode(self::TYPE_DELIMITER, $this->getType());
+        $typeNames = [];
+        foreach ($types as $type) {
+            $typeNames[] = self::TYPE_LIST[$type];
+        }
+
+        return implode(self::TYPE_DELIMITER, $typeNames);
+    }
+
+
 }
