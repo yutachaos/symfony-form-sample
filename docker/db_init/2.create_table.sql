@@ -1,3 +1,4 @@
+USE `symfony`;
 CREATE TABLE `to_do` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `task` tinyint(1) NOT NULL,
