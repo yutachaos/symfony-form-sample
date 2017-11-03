@@ -42,7 +42,9 @@ docker-compose up -d
 symfonyの依存ファイルをinstallする  
 
 ```
-php composer.phar -n --dev install
+
+docker-compose exec server php composer.phar install
+
 ```
 ## Qiita
 - http://qiita.com/yutaChaos/items/0ae0d1797db4cb16466c

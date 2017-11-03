@@ -10,9 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Todo controller.
- *
- * @Route("todo")
- */
+ **/
 class ToDoController extends Controller
 {
     /**
