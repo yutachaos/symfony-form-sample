@@ -29,10 +29,10 @@ php5.6,mysql 5.6.31
 
 
 
-## Requirement
-php,docker,composer
+## Requirements
+docker, docker-compose
 
-## Install
+## Set up environment
 
 - dockerで開発環境をコンテナ作成
 ```
